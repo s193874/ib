@@ -1,0 +1,37 @@
+name: Materialize clean IB source
+on:
+  push:
+    paths:
+      - '.sync/**'
+      - '.github/workflows/assemble-ib.yml'
+permissions:
+  contents: write
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore verified clean source
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 4 --retry-delay 3 'https://raw.githubusercontent.com/Sui-IB/InternalBeyond-Mobile/040bf2a57d3f4efb2a79689a29a95086d6b8b1be/index.html' -o index.html
+          echo '29426f37022f59b80bae9b568340d93e16f55e8c8bf72026a08b7288ae5780f9  index.html' | sha256sum -c -
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64,zlib
+          parts=sorted(Path('.sync').glob('ib-index.part-*.b64'))
+          assert len(parts)==4, f'Expected 4 patch parts, got {len(parts)}'
+          raw=base64.b64decode(''.join(p.read_text(encoding='ascii') for p in parts))
+          Path('index.patch').write_bytes(zlib.decompress(raw))
+          PY
+          patch --batch --forward -p1 < index.patch
+          echo '80aa20929e27472a63db5640c2091d53a3f7454b16637daf40eac75b6953a9c2  index.html' | sha256sum -c -
+          rm -f index.patch
+          rm -rf .sync
+          rm -f .github/workflows/assemble-ib.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Materialize clean IB index.html from audited patch'
+          git push origin HEAD:main

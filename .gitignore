@@ -1,15 +1,32 @@
-# Ignore runtime data and credentials
+# Runtime and user data
 .env
 .env.*
 !.env.example
-*.sqlite*
+*.sqlite
+*.sqlite3
 *.db
-*.log
-uploads/
+*.db-*
 data/
+uploads/
+attachments/
 memories/
-node_modules/
+chat-history/
+logs/
+cache/
+.cache/
 __pycache__/
 *.pyc
+node_modules/
 *.pem
 *.key
+id_rsa*
+id_ed25519*
+*.bak
+*.bak.*
+*.log
+*.zip
+*.tar
+*.tar.gz
+secrets/
+credentials/
+config.local.*

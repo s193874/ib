@@ -1,0 +1,14 @@
+.dw-evidence{border-bottom:1px solid var(--line);padding:10px 2px;font-size:.8rem;min-width:0}
+.dw-evidence>summary{cursor:pointer;color:var(--tx);line-height:1.6;overflow-wrap:anywhere}
+.dw-evidence .mi-grid{margin-top:8px}
+.dw-evidence-text{white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;font:inherit;line-height:1.75;max-width:100%;max-height:none;overflow:visible;color:var(--tx)}
+.dw-message-info{margin-top:10px}
+.dw-sheet-tabs{display:flex;gap:8px;margin-bottom:12px}
+.dw-sheet-tabs .mi-btn{flex:1;min-width:0;padding:10px 6px;font-size:.78rem}
+.dw-sheet-tabs .on{border-color:var(--tx3)}
+.dw-sheet-body{min-width:0}
+
+/* Reuse the native memory receipt card, with readable full text. */
+.dw-state-card .ws-op-text{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
+.dw-state-card.expanded .ws-op-detail{max-height:none;overflow:visible;white-space:pre-wrap;overflow-wrap:anywhere}
+#sheet-core-memory details{margin:10px 0}#sheet-core-memory summary{cursor:pointer;overflow-wrap:anywhere}#sheet-core-memory .core-memory-text{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.75}
