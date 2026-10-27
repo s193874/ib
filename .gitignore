@@ -1,0 +1,15 @@
+# Ignore runtime data and credentials
+.env
+.env.*
+!.env.example
+*.sqlite*
+*.db
+*.log
+uploads/
+data/
+memories/
+node_modules/
+__pycache__/
+*.pyc
+*.pem
+*.key
